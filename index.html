@@ -1,342 +1,770 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUCKY</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Shatter/Fall Effects with Transitions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(45deg, #98cfff, #f8c6ff, #bfff2b);
-      background-size: 600% 400%;
-      color: #000;
-      padding: 10px;
+    html, body {
       margin: 0;
-      animation: flow 5s ease-in-out infinite;
-      animation-delay: 0.5s;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
     }
 
-    @keyframes flow {
+    .welcome-box {
+      width: 300px;
+      height: 150px;
+      background: linear-gradient(45deg, #FF0000, #FF8000, #FFFF00, #80FF00, #00FF00, #00FF80, #00FFFF, #0080FF, #8000FF, #FF00FF);
+      border-radius: 20px;
+      border: 2px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: black;
+      text-shadow: 1px 1px 0 white;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      transition: width 2s ease-in, height 4s ease-out, transform 2s ease-in-out;
+      transition-delay: 0.5s;
+    }
+
+    .welcome-box:hover {
+      width: 350px;
+      height: 200px;
+      transform: scale(1.1);
+    }
+
+    .welcome-box .animated-text {
+      position: relative;
+      transition: transform 2s ease-in-out;
+    }
+
+    .welcome-box:hover .animated-text {
+      transform: scale(1.1);
+    }
+
+    .welcome-box.effect-fall-over {
+      background: linear-gradient(45deg, #FF0000, #00FF00);
+    }
+
+    .welcome-box.effect-drape {
+      background: linear-gradient(45deg, #FF8000, #0080FF);
+    }
+
+    .welcome-box.effect-curtains {
+      background: linear-gradient(45deg, #FFFF00, #FF00FF);
+    }
+
+    .welcome-box.effect-wind {
+      background: linear-gradient(45deg, #80FF00, #8000FF);
+    }
+
+    .welcome-box.effect-prestige {
+      background: linear-gradient(45deg, #00FF00, #00FFFF);
+    }
+
+    .welcome-box.effect-fracture {
+      background: linear-gradient(45deg, #00FF80, #FF0000);
+    }
+
+    .welcome-box.effect-crush {
+      background: linear-gradient(45deg, #00FFFF, #FF8000);
+    }
+
+    .welcome-box.effect-peel-off {
+      background: linear-gradient(45deg, #0080FF, #FFFF00);
+    }
+
+    .welcome-box.effect-page-curl {
+      background: linear-gradient(45deg, #8000FF, #80FF00);
+    }
+
+    .welcome-box.effect-airplane {
+      background: linear-gradient(45deg, #FF00FF, #00FF00);
+    }
+
+    .welcome-box.effect-origami {
+      background: linear-gradient(45deg, #FF0000, #00FF80);
+    }
+
+    .welcome-box.effect-dissolve {
+      background: linear-gradient(45deg, #FF8000, #00FFFF);
+    }
+
+    .welcome-box.effect-checkerboard {
+      background: linear-gradient(45deg, #FFFF00, #0080FF);
+    }
+
+    .welcome-box.effect-blinds {
+      background: linear-gradient(45deg, #80FF00, #FF00FF);
+    }
+
+    .welcome-box.effect-clock {
+      background: linear-gradient(45deg, #00FF00, #8000FF);
+    }
+
+    .welcome-box.effect-ripple {
+      background: linear-gradient(45deg, #00FF80, #FF0000);
+    }
+
+    .welcome-box.effect-honeycomb {
+      background: linear-gradient(45deg, #00FFFF, #FF8000);
+    }
+
+    .welcome-box.effect-glitter {
+      background: linear-gradient(45deg, #0080FF, #FFFF00);
+    }
+
+    .welcome-box.effect-vortex {
+      background: linear-gradient(45deg, #8000FF, #80FF00);
+    }
+
+    .welcome-box.effect-shred {
+      background: linear-gradient(45deg, #FF00FF, #00FF00);
+    }
+
+    .welcome-box.effect-switch {
+      background: linear-gradient(45deg, #FF0000, #00FF80);
+    }
+
+    .welcome-box.effect-flip {
+      background: linear-gradient(45deg, #FF8000, #00FFFF);
+    }
+
+    .welcome-box.effect-gallery {
+      background: linear-gradient(45deg, #FFFF00, #0080FF);
+    }
+
+    .welcome-box.effect-cube {
+      background: linear-gradient(45deg, #80FF00, #FF00FF);
+    }
+
+    .welcome-box::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background-size: 400% 400%;
+      z-index: -1;
+      filter: blur(15px);
+      animation: colorCycle 8s linear infinite;
+      border-radius: 25px;
+    }
+
+    .fragment {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background-size: 400% 400%;
+      animation: colorCycle 8s linear infinite;
+      border-radius: 3px;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .letter-fragment {
+      position: absolute;
+      font-size: 20px;
+      color: white;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    @keyframes colorCycle {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(15px);
-      padding: 40px;
-      border-radius: 25px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      animation: slideUpContainer 1.2s ease-in-out;
+    @keyframes fall {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--x, 0px), 100vh) rotate(var(--r, 360deg)); opacity: 0; }
     }
 
-    @keyframes slideUpContainer {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes spiral {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--x, 0px), 100vh) rotate(var(--r, 720deg)); opacity: 0; }
     }
 
-    h2 {
-      text-align: center;
-      font-size: 36px;
-      margin-bottom: 30px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-      animation: bounceIn 1s ease-in-out;
+    @keyframes bounce {
+      0% { transform: translate(0, 0); opacity: 1; }
+      20% { transform: translate(var(--x, 0px), -50px); }
+      40% { transform: translate(var(--x, 0px), 20px); }
+      100% { transform: translate(var(--x, 0px), 100vh); opacity: 0; }
     }
 
-    @keyframes bounceIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      60% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); }
+    @keyframes wave {
+      0% { transform: translate(0, 0); opacity: 1; }
+      50% { transform: translate(var(--x, 0px), var(--y, -20px)); }
+      100% { transform: translate(var(--x, 0px), 100vh); opacity: 0; }
     }
 
-    .caption {
-      text-align: center;
-      font-size: 24px;
-      margin-top: -20px;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px #ff0000;
-      animation: colorChange 3s infinite ease-in-out;
+    @keyframes explode {
+      0% { transform: translate(0, 0); opacity: 1; }
+      50% { transform: translate(var(--x, 0px), var(--y, 0px)); }
+      100% { transform: translate(var(--x, 0px), 100vh); opacity: 0; }
     }
 
-    @keyframes colorChange {
-      0% { color: rgb(26, 255, 0); text-shadow: 0 0 15px red; }
-      25% { color: rgb(30, 0, 255); text-shadow: 0 0 15px yellow; }
-      50% { color: rgb(255, 0, 43); text-shadow: 0 0 15px pink; }
-      75% { color: rgb(0, 0, 0); text-shadow: 0 0 15px skyblue; }
-      100% { color: rgb(132, 255, 0); text-shadow: 0 0 15px red; }
+    @keyframes fadeSpin {
+      0% { transform: rotate(0deg); opacity: 1; }
+      100% { transform: rotate(var(--r, 360deg)); opacity: 0; }
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      padding: 20px 0;
-      justify-items: center;
+    @keyframes gravity {
+      0% { transform: translate(0, 0); opacity: 1; }
+      100% { transform: translate(var(--x, 0px), 100vh); opacity: 0; }
     }
 
-    .box {
-      background: linear-gradient(45deg, #ff6b6b, #ffe066, #40c4ff, #7b1fa2);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      border: 4px solid rgba(0, 0, 0, 0.3);
-      border-radius: 20px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      width: 100%;
-      max-width: 200px; /* Ensure uniform size */
-      display: inline-block; /* Fit content while maintaining uniformity */
+    @keyframes flip3D {
+      0% { transform: rotateX(0deg) rotateY(0deg); opacity: 1; }
+      100% { transform: rotateX(var(--rx, 360deg)) rotateY(var(--ry, 360deg)) translate(0, 100vh); opacity: 0; }
     }
 
-    @keyframes hueRotate {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
+    @keyframes trailShadow {
+      0% { transform: translate(0, 0); opacity: 1; box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+      100% { transform: translate(var(--x, 0px), 100vh); opacity: 0; box-shadow: 0 0 20px rgba(255, 255, 255, 0); }
     }
 
-    @keyframes floatUpDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+    @keyframes colorFade {
+      0% { opacity: 1; filter: brightness(1); }
+      100% { opacity: 0; filter: brightness(0); }
     }
 
-    .box::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        -45deg,
-        rgba(112, 201, 239, 0.15),
-        rgba(11, 19, 243, 0.181),
-        rgb(0, 0, 0)
-      );
-      animation: waveLine 6s ease-in-out infinite;
-      transform: rotate(45deg);
-      z-index: 0;
-      filter: drop-shadow(0 0 6px rgb(225, 255, 0));
-    }
-
-    @keyframes waveLine {
-      0% { transform: rotate(45deg) translateX(120%) scale(0.85); opacity: 0.35; }
-      25% { transform: rotate(45deg) translateX(60%) scale(1); opacity: 0.65; }
-      50% { transform: rotate(45deg) translateX(-60%) scale(1.25); opacity: 1; }
-      75% { transform: rotate(25deg) translateX(30%) scale(1); opacity: 0.7; }
-      100% { transform: rotate(45deg) translateX(120%) scale(0.85); opacity: 0.35; }
-    }
-
-    .box h4 {
-      position: relative;
-      z-index: 1;
-      color: #000000;
-      font-weight: bold;
-      margin: 0;
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .box:nth-child(1) { 
-      background: linear-gradient(45deg, #0f0f0f, #40f752, #ff5e57, #1dd1a1); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0s, 0s; 
-    }
-
-    .box:nth-child(2) { 
-      background: linear-gradient(45deg, #222f3e, #ff9ff3, #48dbfb, #ff6b6b); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0.2s, 0s; 
-    }
-
-    .box:nth-child(3) { 
-      background: linear-gradient(45deg, #0a3d62, #54a0ff, #f368e0, #feca57); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0.4s, 0s; 
-    }
-
-    .box:nth-child(4) { 
-      background: linear-gradient(45deg, #1e272e, #ff9f1a, #32ff7e, #18dcff); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0.6s, 0s; 
-    }
-
-    .box:nth-child(5) { 
-      background: linear-gradient(45deg, #2f3640, #e84118, #0097e6, #9c88ff); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0.8s, 0s; 
-    }
-
-    .box:nth-child(6) { 
-      background: linear-gradient(45deg, #130f40, #feca57, #ff0000, #00a8ff); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 1s, 0s; 
-    }
-
-    .box:nth-child(7) { 
-      background: linear-gradient(45deg, #0051ff, #ff6b81, #7bed9f, #70a1ff); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 1.2s, 0s; 
-    }
-
-    .box:nth-child(8) { 
-      background: linear-gradient(45deg, #ff4000, #00ff26, #1100ff, #d000ff); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 1.4s, 0s; 
-    }
-
-    .box:nth-child(9) { 
-      background: linear-gradient(45deg, #1e90ff, #ff6347, #00ced1, #ff4500); 
-      background-size: 400% 400%; 
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 1.6s, 0s; 
-    }
-
-    .box:hover {
-      transform: scale(1.1); /* 10% zoom on hover */
-      box-shadow: 
-        0 0 20px red, 
-        0 0 40px yellow, 
-        0 0 60px pink, 
-        0 0 80px skyblue;
-      filter: brightness(1.3);
-      z-index: 10;
-      transition: all 0.2s ease;
-    }
-
-    .box h4 {
-      font-size: px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    @media (min-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(4, 1fr);
+    @media (max-width: 768px) {
+      .welcome-box {
+        width: 250px;
+        height: 120px;
+        font-size: 40px;
       }
-      .box {
-        padding: 40px;
+      .welcome-box:hover {
+        width: 300px;
+        height: 160px;
       }
-      .box h4 {
-        font-size: 24px;
+      .fragment, .letter-fragment {
+        width: 15px;
+        height: 15px;
+        font-size: 15px;
       }
     }
 
-    @media (max-width: 767px) {
-      .container {
-        padding: 20px;
+    @media (max-width: 480px) {
+      .welcome-box {
+        width: 200px;
+        height: 100px;
+        font-size: 30px;
       }
-      .grid {
-        grid-template-columns: repeat(2, 1fr); /* Exactly 2 boxes per row */
-        gap: 45px; /* Minimum 2px gap between boxes on mobile */
+      .welcome-box:hover {
+        width: 240px;
+        height: 130px;
       }
-      .box {
-        padding: 20px; /* Reduced padding to make boxes smaller */
-        max-width: 150px; /* Reduced max-width for smaller boxes */
-      }
-      .box h4 {
-        font-size: 20px; /* Smaller font size for mobile */
+      .fragment, .letter-fragment {
+        width: 10px;
+        height: 10px;
+        font-size: 12px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-   <h2>LUCKY <br>
-  <span class="board">R.L.S.P.A.B.F</span> <br/>
-</h2>
+  <audio id="bgAudio" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/31/audio_3f6b35294c.mp3?filename=space-ambient-112925.mp3" type="audio/mp3">
+    Your browser does not support audio.
+  </audio>
 
-<style>
-  .board {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #fff; /* white board */
-    font-weight: bold;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2),
-                0 8px 16px rgba(0,0,0,0.2);
-    transform: perspective(600px) rotateX(5deg);
-    transition: all 0.3s ease-in-out;
-
-    /* rainbow gradient text with animation */
-    background-image: linear-gradient(90deg,
-      #ff0000,
-      #ff54aa,
-      #ffff00,
-      #002aff,
-      #2bff00,
-      #4b0082,
-      #8b00ff
-    );
-    background-size: 400% 400%;
-    animation: rainbow 5s linear infinite;
-    
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-  }
-
-  .board:hover {
-    transform: perspective(600px) rotateX(0deg) translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.25),
-                0 12px 24px rgba(0,0,0,0.25);
-  }
-
-  @keyframes rainbow {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-</style>
-
-    <p class="caption"></p>
-    <div class="grid">
-      
-      <div class="box" onclick="clickEffect(this,'#60a5fa', 'https://youtubein.github.io/2/')">
-        <h4>Countdown</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#34d399', 'https://youtubein.github.io/3/')">
-        <h4>All Subject</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#facc15', 'https://youtubein.github.io/4/')">
-        <h4>Routine</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#fb7185', 'https://youtubein.github.io/6/')">
-        <h4>Policy</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#fbbf24', 'https://youtubein.github.io/7/')">
-        <h4>Syllabus</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#22d3ee', 'https://youtubein.github.io/8/')">
-        <h4>This 4 Month</h4>
-      </div>
+  <div class="welcome-box" id="welcomeBox" role="button" aria-label="Animated Welcome Text">
+    <div class="animated-text">
+      WELCOME
     </div>
   </div>
+
   <script>
-    function clickEffect(el, color, url){
-      const original = el.style.background;
-      el.style.background = color;
-      setTimeout(() => {
-        window.open(url, '_blank');
-        el.style.background = original;
-      }, 800);
+    const box = document.getElementById('welcomeBox');
+    const audio = document.getElementById('bgAudio');
+    let audioContext, analyser, dataArray;
+
+    // Initialize Web Audio API for audio-sync effect
+    function initAudioContext() {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioContext.createAnalyser();
+      const source = audioContext.createMediaElementSource(audio);
+      source.connect(analyser);
+      analyser.connect(audioContext.destination);
+      analyser.fftSize = 256;
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
     }
+
+    // Get audio beat intensity
+    function getAudioIntensity() {
+      analyser.getByteFrequencyData(dataArray);
+      return dataArray.reduce((sum, val) => sum + val, 0) / dataArray.length;
+    }
+
+    // Shuffle function
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Modular effect functions
+    const effects = {
+      pixelShatter: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-fall-over');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+            frag.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+            frag.style.animation = `fall 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.3}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 1700);
+      },
+
+      letterRain: () => {
+        const boxRect = box.getBoundingClientRect();
+        const letters = 'WELCOME'.split('');
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-drape');
+        letters.forEach((letter, i) => {
+          const span = box.querySelector('.animated-text');
+          const spanRect = span.getBoundingClientRect();
+          for (let j = 0; j < 5; j++) {
+            const frag = document.createElement('div');
+            frag.classList.add('letter-fragment');
+            frag.textContent = letter;
+            frag.style.left = (spanRect.left + Math.random() * spanRect.width / 7) + 'px';
+            frag.style.top = (spanRect.top + Math.random() * spanRect.height) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 100 - 50) + 'px');
+            frag.style.setProperty('--r', (Math.random() * 360) + 'deg');
+            frag.style.animation = `fall 2s ease-in-out forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.5}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        });
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 2200);
+      },
+
+      gradientBurst: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 15;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-curtains');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+            frag.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+            frag.style.animation = `fall 1.5s ease forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.3}s`;
+            frag.style.filter = 'blur(2px)';
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 1700);
+      },
+
+      flip3D: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-wind');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--rx', (Math.random() * 720 - 360) + 'deg');
+            frag.style.setProperty('--ry', (Math.random() * 720 - 360) + 'deg');
+            frag.style.animation = `flip3D 1.8s ease-out forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.4}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 2000);
+      },
+
+      randomBounce: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-prestige');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+            frag.style.animation = `bounce 2s linear forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.5}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 2200);
+      },
+
+      spiralFall: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 15;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-fracture');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+            frag.style.setProperty('--r', (Math.random() * 1440 - 720) + 'deg');
+            frag.style.animation = `spiral 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.4}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 2200);
+      },
+
+      trailShadow: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-crush');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+            frag.style.animation = `trailShadow 1.5s ease-in forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.3}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 1700);
+      },
+
+      letterScatter: () => {
+        const boxRect = box.getBoundingClientRect();
+        const letters = 'WELCOME'.split('');
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-peel-off');
+        letters.forEach((letter, i) => {
+          const span = box.querySelector('.animated-text');
+          const spanRect = span.getBoundingClientRect();
+          const frag = document.createElement('div');
+          frag.classList.add('letter-fragment');
+          frag.textContent = letter;
+          frag.style.left = (spanRect.left + (spanRect.width / 7) * i) + 'px';
+          frag.style.top = spanRect.top + 'px';
+          frag.style.setProperty('--x', (Math.random() * 300 - 150) + 'px');
+          frag.style.setProperty('--y', (Math.random() * 300 - 150) + 'px');
+          frag.style.animation = `explode 2s ease-in-out forwards`;
+          frag.style.animationDelay = `${i * 0.1}s`;
+          document.body.appendChild(frag);
+          fragments.push(frag);
+        });
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 2200);
+      },
+
+      waveFall: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-page-curl');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 100 - 50) + 'px');
+            frag.style.setProperty('--y', Math.sin(x / 20) * 50 + 'px');
+            frag.style.animation = `wave 2s ease forwards`;
+            frag.style.animationDelay = `${(x + y) / 100}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 2200);
+      },
+
+      particleExplosion: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 10;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-airplane');
+        for (let i = 0; i < 200; i++) {
+          const frag = document.createElement('div');
+          frag.classList.add('fragment');
+          frag.style.width = fragmentSize + 'px';
+          frag.style.height = fragmentSize + 'px';
+          frag.style.left = (boxRect.left + Math.random() * boxRect.width) + 'px';
+          frag.style.top = (boxRect.top + Math.random() * boxRect.height) + 'px';
+          frag.style.setProperty('--x', (Math.random() * 400 - 200) + 'px');
+          frag.style.setProperty('--y', (Math.random() * 400 - 200) + 'px');
+          frag.style.animation = `explode 1.5s ease-out forwards`;
+          frag.style.animationDelay = `${Math.random() * 0.5}s`;
+          document.body.appendChild(frag);
+          fragments.push(frag);
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 1700);
+      },
+
+      colorFade: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-origami');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+            frag.style.animation = `colorFade 1.5s linear forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.3}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 1700);
+      },
+
+      directionalShatter: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-dissolve');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (x / boxRect.width - 0.5) * 300 + 'px');
+            frag.style.setProperty('--r', (Math.random() * 360) + 'deg');
+            frag.style.animation = `fall 1.5s ease-in forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.3}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 1700);
+      },
+
+      gravityPull: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-checkerboard');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 100 - 50) + 'px');
+            frag.style.animation = `gravity 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.3}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 2200);
+      },
+
+      fadeSpin: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-blinds');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+            frag.style.animation = `fadeSpin 1.5s ease-in-out forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.3}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 1700);
+      },
+
+      letterRainAudio: () => {
+        initAudioContext();
+        const boxRect = box.getBoundingClientRect();
+        const letters = 'WELCOME'.split('');
+        const fragments = [];
+        audio.play();
+        box.style.opacity = 0;
+        box.classList.add('effect-clock');
+        letters.forEach((letter, i) => {
+          const span = box.querySelector('.animated-text');
+          const spanRect = span.getBoundingClientRect();
+          for (let j = 0; j < 5; j++) {
+            const frag = document.createElement('div');
+            frag.classList.add('letter-fragment');
+            frag.textContent = letter;
+            frag.style.left = (spanRect.left + Math.random() * spanRect.width / 7) + 'px';
+            frag.style.top = (spanRect.top + Math.random() * spanRect.height) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 100 - 50) + 'px');
+            frag.style.setProperty('--r', (Math.random() * 360) + 'deg');
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        });
+        function animate() {
+          const intensity = getAudioIntensity();
+          fragments.forEach((frag, idx) => {
+            if (!frag.style.animation) {
+              const delay = intensity > 50 ? Math.random() * 0.2 : Math.random() * 0.5;
+              frag.style.animation = `fall ${1.5 + intensity / 100}s ease-in-out forwards`;
+              frag.style.animationDelay = `${delay}s`;
+            }
+          });
+          if (fragments.some(frag => !frag.style.animation)) {
+            requestAnimationFrame(animate);
+          } else {
+            setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 2000);
+          }
+        }
+        requestAnimationFrame(animate);
+      },
+
+      original: () => {
+        const boxRect = box.getBoundingClientRect();
+        const fragmentSize = 20;
+        const fragments = [];
+        audio.pause();
+        box.style.opacity = 0;
+        box.classList.add('effect-ripple');
+        for (let y = 0; y < boxRect.height; y += fragmentSize) {
+          for (let x = 0; x < boxRect.width; x += fragmentSize) {
+            const frag = document.createElement('div');
+            frag.classList.add('fragment');
+            frag.style.left = (boxRect.left + x) + 'px';
+            frag.style.top = (boxRect.top + y) + 'px';
+            frag.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+            frag.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+            frag.style.animation = `fall 1.5s ease forwards`;
+            frag.style.animationDelay = `${Math.random() * 0.3}s`;
+            document.body.appendChild(frag);
+            fragments.push(frag);
+          }
+        }
+        setTimeout(() => window.location.href = 'https://youtubein.github.io/1TO8/', 1700);
+      }
+    };
+
+    // Get effect keys
+    const effectKeys = Object.keys(effects);
+
+    // Event listener for effect selection and click
+    box.addEventListener('click', () => {
+      // Shuffle logic with localStorage
+      let shuffledEffects = JSON.parse(localStorage.getItem('shuffledEffects'));
+      let currentIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
+
+      if (!shuffledEffects || currentIndex >= shuffledEffects.length) {
+        shuffledEffects = shuffle([...effectKeys]);
+        currentIndex = 0;
+        localStorage.setItem('shuffledEffects', JSON.stringify(shuffledEffects));
+      }
+
+      const selectedEffect = shuffledEffects[currentIndex];
+
+      // Update index for next time
+      currentIndex++;
+      localStorage.setItem('currentIndex', currentIndex);
+
+      // Remove previous effect class
+      box.classList.remove(...effectKeys.map(e => `effect-${e}`));
+
+      // Ensure transitions complete before shattering
+      setTimeout(() => {
+        effects[selectedEffect]();
+      }, 1000); // Wait for transition delay (0.5s) + some buffer
+    });
+
+    // Keyboard support for accessibility
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        box.click();
+      }
+    });
   </script>
 </body>
 </html>
